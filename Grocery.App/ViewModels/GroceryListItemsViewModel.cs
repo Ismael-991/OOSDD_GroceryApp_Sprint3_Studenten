@@ -5,6 +5,7 @@ using Grocery.App.Views;
 using Grocery.Core.Interfaces.Services;
 using Grocery.Core.Models;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Text.Json;
 
 namespace Grocery.App.ViewModels
@@ -85,6 +86,35 @@ namespace Grocery.App.ViewModels
                 await Toast.Make($"Opslaan mislukt: {ex.Message}").Show(cancellationToken);
             }
         }
+        [RelayCommand]
+        public void RemoveProduct(GroceryListItem item)
+        {
+            try
+            {
+                if (item == null) return;
+
+                // De service handelt nu ook de voorraad-verhoging af
+                var deleted = _groceryListItemsService.Delete(item.Id);
+                if (deleted == null) return;
+
+                // UI bijwerken
+                MyGroceryListItems.Remove(item);
+
+                // Het product is weer beschikbaar (stock is verhoogd)
+                var product = _productService.Get(item.ProductId);
+                if (product != null && !AvailableProducts.Any(p => p.Id == product.Id))
+                {
+                    AvailableProducts.Add(product);
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"RemoveProduct crash: {ex.Message}");
+            }
+        }
+
+
+
 
     }
 }
