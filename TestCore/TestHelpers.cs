@@ -27,18 +27,23 @@ namespace TestCore
         }
 
 
-        //Unhappy flow
+        // Unhappy flow 
         [Test]
         public void TestPasswordHelperReturnsFalse()
         {
-            Assert.Pass(); //Zelf uitwerken
+            string password = "verkeerd";
+            string passwordHash = "sxnIcZdYt8wC8MYWcQVQjQ==.FKd5Z/jwxPv3a63lX+uvQ0+P7EuNYZybvkmdhbnkIHA=";
+            bool result = PasswordHelper.VerifyPassword(password, passwordHash);
+            Assert.IsFalse(result, "Het wachtwoord zou onjuist moeten zijn.");
         }
 
-        [TestCase("user1", "IunRhDKa+fWo8+4/Qfj7Pg==.kDxZnUQHCZun6gLIE6d9oeULLRIuRmxmH2QKJv2IM08")]
-        [TestCase("user3", "sxnIcZdYt8wC8MYWcQVQjQ==.FKd5Z/jwxPv3a63lX+uvQ0+P7EuNYZybvkmdhbnkIHA")]
+        [TestCase("verkeerd", "sxnIcZdYt8wC8MYWcQVQjQ==.FKd5Z/jwxPv3a63lX+uvQ0+P7EuNYZybvkmdhbnkIHA=")]
+        [TestCase("foutwachtwoord", "IunRhDKa+fWo8+4/Qfj7Pg==.kDxZnUQHCZun6gLIE6d9oeULLRIuRmxmH2QKJv2IM08=")]
         public void TestPasswordHelperReturnsFalse(string password, string passwordHash)
         {
-            Assert.Fail(); //Zelf uitwerken zodat de test slaagt!
+            bool result = PasswordHelper.VerifyPassword(password, passwordHash);
+            Assert.IsFalse(result, "Het wachtwoord zou onjuist moeten zijn.");
         }
+
     }
 }
