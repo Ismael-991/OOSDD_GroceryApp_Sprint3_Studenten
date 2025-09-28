@@ -1,4 +1,4 @@
-﻿namespace Grocery.App.Models
+﻿namespace Grocery.App.Models.Mac
 {
     // All the code in this file is only included on Mac Catalyst.
     public class PlatformClass1

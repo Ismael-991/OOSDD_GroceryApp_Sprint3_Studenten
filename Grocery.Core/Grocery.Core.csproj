@@ -7,6 +7,7 @@
 
 	<ItemGroup>
 		<!-- Alleen als je MVVM source generators gebruikt -->
+		<PackageReference Include="CommunityToolkit.Maui.Core" Version="8.0.1" />
 		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.3.2" />
 	</ItemGroup>
 </Project>

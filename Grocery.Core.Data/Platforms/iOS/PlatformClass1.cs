@@ -1,4 +1,4 @@
-﻿namespace Grocery.App.Data
+﻿namespace Grocery.App.Data.IOS
 {
     // All the code in this file is only included on iOS.
     public class PlatformClass1
